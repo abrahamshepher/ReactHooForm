@@ -7,4 +7,10 @@ export const schema = z.object({
   states:z.array(z.string()).min(1,{message:"At least one state is required"}).max(5,{message:"Maximum of 5 states"}),
 });
 
-export type Schema=z.infer<typeof schema>;
+export type Schema = z.infer<typeof schema>;
+
+export const initialValues: Schema = {
+  name: "",
+  email: "",
+  states: []
+};
