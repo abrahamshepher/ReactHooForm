@@ -4,7 +4,9 @@ import { patterns } from '../../constants';
 export const schema = z.object({
   name: z.string().min(1,{message:"Name is required"}),
   email: z.string().min(1, { message: "Email is required" }).refine((text) => patterns.email.test(text), { message: "Invalid email" }),
-  states:z.array(z.string()).min(1,{message:"At least one state is required"}).max(5,{message:"Maximum of 5 states"}),
+  states: z.array(z.string()).min(1, { message: "At least one state is required" }).max(5, { message: "Maximum of 5 states" }),
+  languages: z.array(z.string()).min(1, { message: "At least one language is required" }).max(5, { message: "Maximum of 5 languages" }),
+  genders:z.string().min(1,{message:"1 Gender is required"})
 });
 
 export type Schema = z.infer<typeof schema>;
@@ -12,5 +14,7 @@ export type Schema = z.infer<typeof schema>;
 export const initialValues: Schema = {
   name: "",
   email: "",
-  states: []
+  states: [],
+  languages: [],
+  genders:""
 };

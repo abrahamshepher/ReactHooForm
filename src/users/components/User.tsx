@@ -3,12 +3,16 @@ import { useFormContext } from "react-hook-form";
 import { Schema } from "../types/_model";
 import { RHFAutoComplete } from "../../components/RHFAutoComplete";
 import { useEffect } from "react";
-import { useStates } from "../services/queries";
+import { useGenders, useLanguagues, useStates } from "../services/queries";
+import { RHFToggleButtonGroup } from "../../components/RHFToggleButtonGroup";
+import { RHFRadioGroup } from "../../components/RHFRadioGroup";
 
 
 const User = () => {
   const statesQuery=useStates()
-
+  const languagesQuery = useLanguagues()
+  const gendersQuery = useGenders()
+  
   const { register, formState: { errors }, watch } = useFormContext<Schema>()
   
   useEffect(() => { 
@@ -32,7 +36,9 @@ const User = () => {
           helperText={errors.email?.message}
         />
       </Stack>
-      <RHFAutoComplete<Schema>  name="states" label="States" options={statesQuery.data}/>
+      <RHFAutoComplete<Schema> name="states" label="States" options={statesQuery.data} />
+      <RHFToggleButtonGroup<Schema> name="languages" options={languagesQuery.data} />
+      <RHFRadioGroup<Schema> name="genders" options={gendersQuery.data} label="Gender"/>
     </>
   );
 };

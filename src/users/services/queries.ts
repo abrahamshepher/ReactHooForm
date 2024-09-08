@@ -20,6 +20,16 @@ export function useLanguagues(){
         }
     )
 }
+
+export function useGenders(){
+    return useQuery(
+        {
+            queryKey: ['genders'],
+            queryFn:()=>axios.get<Option[]>(`${API_URL}/genders`).then((res:AxiosResponse<Option[]>)=>res.data)
+        }
+    )
+}
+
 export function useSkills(){
     return useQuery(
         {
